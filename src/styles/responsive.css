@@ -1,0 +1,18 @@
+@media (max-width: 768px) {
+  :root {
+    --font-3xl: 1.5rem;
+    --font-2xl: 1.25rem;
+  }
+
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --spacing-lg: 1rem;
+    --font-xl: 1rem;
+    --font-2xl: 1.25rem;
+  }
+}

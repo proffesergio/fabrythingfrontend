@@ -1,0 +1,68 @@
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: var(--spacing-lg);
+  background: var(--gray-50);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--gray-200);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--error-color), var(--warning-color));
+  padding: var(--spacing-lg);
+}
+
+.errorContent {
+  background: white;
+  padding: var(--spacing-3xl);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  max-width: 500px;
+  box-shadow: var(--shadow-xl);
+}
+
+.errorContent h1 {
+  color: var(--error-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.errorContent p {
+  color: var(--gray-600);
+  margin-bottom: var(--spacing-xl);
+}
+
+.errorContent button {
+  background: var(--primary-color);
+  color: white;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  border: none;
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.errorContent button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}

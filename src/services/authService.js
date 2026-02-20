@@ -1,104 +1,202 @@
-import api from './api';
-import { API_ENDPOINTS, TOKEN_KEYS } from '../utils/constants';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api/v1';
 
-export const authService = {
-  register: async (email, password, confirmPassword, firstName = '', lastName = '') => {
+/**
+ * Authentication Service
+ * Handles all authentication API calls
+ */
+class AuthService {
+  /**
+   * Register new user
+   */
+  static async register(userData) {
     try {
-      const response = await api.post(API_ENDPOINTS.AUTH.REGISTER, {
-        email,
-        password,
-        confirm_password: confirmPassword,
-        first_name: firstName,
-        last_name: lastName,
+      const response = await fetch(`${API_BASE_URL}/auth/register/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
       });
-      return {
-        success: true,
-        data: response.data,
-      };
-    } catch (error) {
-      return {
-        success: false,
-        error: error.response?.data?.error || 'Registration failed',
-      };
-    }
-  },
 
-  login: async (email, password) => {
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed');
+      }
+
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
+   * Login user
+   */
+  static async login(credentials) {
     try {
-      const response = await api.post(API_ENDPOINTS.AUTH.LOGIN, {
-        email,
-        password,
+      const response = await fetch(`${API_BASE_URL}/auth/login/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
       });
-      const { access_token, refresh_token, user } = response.data;
 
-      localStorage.setItem(TOKEN_KEYS.ACCESS, access_token);
-      localStorage.setItem(TOKEN_KEYS.REFRESH, refresh_token);
-      localStorage.setItem(TOKEN_KEYS.USER, JSON.stringify(user));
+      const data = await response.json();
 
-      return {
-        success: true,
-        data: { accessToken: access_token, refreshToken: refresh_token, user },
-      };
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
+
+      // Store tokens
+      if (data.data && data.data.access_token) {
+        localStorage.setItem(
+          'access_token',
+          data.data.access_token
+        );
+        localStorage.setItem(
+          'refresh_token',
+          data.data.refresh_token
+        );
+        localStorage.setItem(
+          'user',
+          JSON.stringify(data.data.user)
+        );
+      }
+
+      return data;
     } catch (error) {
-      return {
-        success: false,
-        error: error.response?.data?.error || 'Login failed',
-      };
+      throw error;
     }
-  },
+  }
 
-  logout: async (refreshToken) => {
+  /**
+   * Refresh access token
+   */
+  static async refreshToken() {
     try {
-      await api.post(API_ENDPOINTS.AUTH.LOGOUT, {
-        refresh_token: refreshToken,
+      const refreshToken = localStorage.getItem('refresh_token');
+
+      if (!refreshToken) {
+        throw new Error('No refresh token found');
+      }
+
+      const response = await fetch(`${API_BASE_URL}/auth/refresh/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          refresh: refreshToken,
+        }),
       });
-      localStorage.removeItem(TOKEN_KEYS.ACCESS);
-      localStorage.removeItem(TOKEN_KEYS.REFRESH);
-      localStorage.removeItem(TOKEN_KEYS.USER);
-      return { success: true };
-    } catch (error) {
-      localStorage.removeItem(TOKEN_KEYS.ACCESS);
-      localStorage.removeItem(TOKEN_KEYS.REFRESH);
-      localStorage.removeItem(TOKEN_KEYS.USER);
-      return { success: false, error: error.response?.data?.error || 'Logout failed' };
-    }
-  },
 
-  refreshToken: async (refreshToken) => {
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Refresh failed, logout user
+        AuthService.logout();
+        throw new Error('Token refresh failed');
+      }
+
+      // Update access token
+      localStorage.setItem(
+        'access_token',
+        data.data.access_token
+      );
+
+      return data;
+    } catch (error) {
+      AuthService.logout();
+      throw error;
+    }
+  }
+
+  /**
+   * Get current user
+   */
+  static async getCurrentUser() {
     try {
-      const response = await api.post(API_ENDPOINTS.AUTH.REFRESH, {
-        refresh_token: refreshToken,
+      const token = localStorage.getItem('access_token');
+
+      if (!token) {
+        return null;
+      }
+
+      const response = await fetch(`${API_BASE_URL}/auth/me/`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
       });
-      const { access_token, refresh_token: newRefreshToken } = response.data;
 
-      localStorage.setItem(TOKEN_KEYS.ACCESS, access_token);
-      localStorage.setItem(TOKEN_KEYS.REFRESH, newRefreshToken);
+      if (!response.ok) {
+        // Token might be expired, try to refresh
+        if (response.status === 401) {
+          await AuthService.refreshToken();
+          return AuthService.getCurrentUser();
+        }
+        throw new Error('Failed to fetch user');
+      }
 
-      return {
-        success: true,
-        data: { accessToken: access_token, refreshToken: newRefreshToken },
-      };
+      const data = await response.json();
+      return data.data;
     } catch (error) {
-      return {
-        success: false,
-        error: error.response?.data?.error || 'Token refresh failed',
-      };
+      console.error('Error fetching current user:', error);
+      return null;
     }
-  },
+  }
 
-  getProfile: async () => {
+  /**
+   * Logout user
+   */
+  static logout() {
     try {
-      const response = await api.get(API_ENDPOINTS.AUTH.PROFILE);
-      const user = response.data.user;
-      localStorage.setItem(TOKEN_KEYS.USER, JSON.stringify(user));
-      return { success: true, data: user };
-    } catch (error) {
-      return {
-        success: false,
-        error: error.response?.data?.error || 'Failed to fetch profile',
-      };
-    }
-  },
-};
+      const token = localStorage.getItem('access_token');
 
-export default authService;
+      // Call logout endpoint for logging purposes
+      if (token) {
+        fetch(`${API_BASE_URL}/auth/logout/`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }).catch(err => console.error('Logout error:', err));
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      // Clear all auth data from localStorage
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      localStorage.removeItem('user');
+    }
+  }
+
+  /**
+   * Get stored user
+   */
+  static getStoredUser() {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
+
+  /**
+   * Check if user is logged in
+   */
+  static isAuthenticated() {
+    return !!localStorage.getItem('access_token');
+  }
+
+  /**
+   * Get access token
+   */
+  static getAccessToken() {
+    return localStorage.getItem('access_token');
+  }
+}
+
+export default AuthService;

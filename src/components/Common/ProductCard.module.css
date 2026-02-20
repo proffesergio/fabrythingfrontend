@@ -1,0 +1,192 @@
+.card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.imageWrapper {
+  position: relative;
+  display: block;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.badges {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.actions {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .actions {
+  opacity: 1;
+}
+
+.actionBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.actionBtn:hover {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.wishlistBtn.active {
+  background: #e53935;
+  color: #fff;
+}
+
+.wishlistBtn.active:hover {
+  background: #c62828;
+}
+
+.cartBtn:hover {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.content {
+  padding: 1rem;
+}
+
+.category {
+  display: block;
+  font-size: 0.75rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.name {
+  display: block;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.name:hover {
+  text-decoration: underline;
+}
+
+.ratingWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.reviewCount {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.priceWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.currentPrice {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.originalPrice {
+  font-size: 0.85rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+/* Horizontal variant */
+.card.horizontal .imageWrapper {
+  aspect-ratio: 1/1;
+}
+
+.card.horizontal .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Compact variant */
+.card.compact .imageWrapper {
+  aspect-ratio: 1/1;
+}
+
+.card.compact .content {
+  padding: 0.75rem;
+}
+
+.card.compact .name {
+  font-size: 0.85rem;
+}
+
+.card.compact .currentPrice {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .actions {
+    opacity: 1;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .card:hover .image {
+    transform: none;
+  }
+}

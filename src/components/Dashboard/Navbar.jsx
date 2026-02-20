@@ -1,41 +1,69 @@
-import React from 'react';
-import { useAuth } from '../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
-import { FiLogOut, FiUser } from 'react-icons/fi';
+import React, { useState } from 'react';
+import useAuth from '../../hooks/useAuth';  // Changed from { useAuth }
 import styles from './Dashboard.module.css';
 
-const Navbar = () => {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
+const Navbar = ({ onLogout, sidebarOpen, onSidebarToggle }) => {
+  const { user } = useAuth();
+  const [showMenu, setShowMenu] = useState(false);
 
-  const handleLogout = async () => {
-    const result = await logout();
-    if (result.success) {
-      navigate('/login');
-    }
+  const handleLogoutClick = () => {
+    setShowMenu(false);
+    onLogout();
   };
 
   return (
     <nav className={styles.navbar}>
-      <div className={styles.navContainer}>
+      <div className={styles.navbarContainer}>
+        {/* Toggle Sidebar Button */}
+        <button
+          className={styles.sidebarToggle}
+          onClick={onSidebarToggle}
+          aria-label="Toggle sidebar"
+        >
+          ☰
+        </button>
+
+        {/* Logo */}
         <div className={styles.logo}>
           <h1>Fabrything</h1>
         </div>
 
-        <div className={styles.navRight}>
+        {/* User Menu */}
+        <div className={styles.userMenu}>
           <div className={styles.userInfo}>
-            <div className={styles.avatar}>
-              {user?.first_name ? user.first_name[0].toUpperCase() : 'U'}
-            </div>
-            <div className={styles.userDetails}>
-              <p className={styles.userName}>{user?.first_name || 'User'}</p>
-              <p className={styles.userEmail}>{user?.email}</p>
-            </div>
+            <span className={styles.userName}>
+              {user?.first_name} {user?.last_name}
+            </span>
+            <span className={styles.userEmail}>
+              {user?.email}
+            </span>
           </div>
 
-          <button className={styles.logoutButton} onClick={handleLogout} title="Logout">
-            <FiLogOut />
+          <button
+            className={styles.userMenuToggle}
+            onClick={() => setShowMenu(!showMenu)}
+            aria-label="User menu"
+          >
+            👤
           </button>
+
+          {showMenu && (
+            <div className={styles.dropdownMenu}>
+              <a href="#profile" className={styles.menuItem}>
+                Profile
+              </a>
+              <a href="#settings" className={styles.menuItem}>
+                Settings
+              </a>
+              <hr />
+              <button
+                onClick={handleLogoutClick}
+                className={styles.logoutBtn}
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </nav>

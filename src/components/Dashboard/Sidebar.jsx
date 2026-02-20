@@ -1,44 +1,53 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import {
-  FiHome,
-  FiBarChart2,
-  FiShoppingCart,
-  FiBox,
-  FiSettings,
-} from 'react-icons/fi';
+import { NavLink } from 'react-router-dom';
 import styles from './Dashboard.module.css';
 
-const Sidebar = () => {
-  const location = useLocation();
-
-  const menuItems = [
-    { icon: FiHome, label: 'Home', path: '/dashboard' },
-    { icon: FiBarChart2, label: 'Analytics', path: '/dashboard/analytics' },
-    { icon: FiShoppingCart, label: 'Orders', path: '/dashboard/orders' },
-    { icon: FiBox, label: 'Products', path: '/dashboard/products' },
-    { icon: FiSettings, label: 'Settings', path: '/dashboard/settings' },
-  ];
-
+const Sidebar = ({ open }) => {
   return (
-    <aside className={styles.sidebar}>
+    <aside className={`${styles.sidebar} ${open ? styles.open : styles.closed}`}>
       <nav className={styles.sidebarNav}>
-        {menuItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = location.pathname === item.path;
-
-          return (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`${styles.sidebarLink} ${isActive ? styles.active : ''}`}
-              title={item.label}
+        <ul>
+          <li>
+            <NavLink 
+              to="/dashboard" 
+              className={({ isActive }) => isActive ? styles.active : ''}
             >
-              <Icon className={styles.sidebarIcon} />
-              <span>{item.label}</span>
-            </Link>
-          );
-        })}
+              📊 Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <NavLink 
+              to="/products" 
+              className={({ isActive }) => isActive ? styles.active : ''}
+            >
+              📦 Products
+            </NavLink>
+          </li>
+          <li>
+            <NavLink 
+              to="/orders" 
+              className={({ isActive }) => isActive ? styles.active : ''}
+            >
+              🛒 Orders
+            </NavLink>
+          </li>
+          <li>
+            <NavLink 
+              to="/customers" 
+              className={({ isActive }) => isActive ? styles.active : ''}
+            >
+              👥 Customers
+            </NavLink>
+          </li>
+          <li>
+            <NavLink 
+              to="/settings" 
+              className={({ isActive }) => isActive ? styles.active : ''}
+            >
+              ⚙️ Settings
+            </NavLink>
+          </li>
+        </ul>
       </nav>
     </aside>
   );

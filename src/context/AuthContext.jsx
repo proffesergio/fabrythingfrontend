@@ -1,110 +1,140 @@
-import React, { createContext, useState, useCallback, useEffect } from 'react';
-import authService from '../services/authService';
-import { TOKEN_KEYS } from '../utils/constants';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
+import AuthService from '../services/authService';
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [accessToken, setAccessToken] = useState(null);
-  const [refreshToken, setRefreshToken] = useState(null);
+  const [error, setError] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Initialize auth state from localStorage
-  useEffect(() => {
-    const initializeAuth = () => {
-      try {
-        const storedAccessToken = localStorage.getItem(TOKEN_KEYS.ACCESS);
-        const storedRefreshToken = localStorage.getItem(TOKEN_KEYS.REFRESH);
-        const storedUser = localStorage.getItem(TOKEN_KEYS.USER);
+  /**
+   * Initialize auth state on app load
+   */
+  const initializeAuth = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-        if (storedAccessToken && storedRefreshToken) {
-          setAccessToken(storedAccessToken);
-          setRefreshToken(storedRefreshToken);
-          if (storedUser) {
-            setUser(JSON.parse(storedUser));
-          }
+      // Check if user is already logged in
+      if (AuthService.isAuthenticated()) {
+        const currentUser = await AuthService.getCurrentUser();
+        
+        if (currentUser) {
+          setUser(currentUser);
+          setIsAuthenticated(true);
+        } else {
+          // Token is invalid, logout
+          AuthService.logout();
+          setUser(null);
+          setIsAuthenticated(false);
         }
-      } catch (error) {
-        console.error('Error initializing auth:', error);
-      } finally {
-        setLoading(false);
       }
-    };
+    } catch (err) {
+      console.error('Auth initialization error:', err);
+      setError(err.message);
+      setUser(null);
+      setIsAuthenticated(false);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
+  useEffect(() => {
     initializeAuth();
-  }, []);
+  }, [initializeAuth]);
 
-  const register = useCallback(
-    async (email, password, confirmPassword, firstName = '', lastName = '') => {
-      const result = await authService.register(email, password, confirmPassword, firstName, lastName);
-      return result;
-    },
-    []
-  );
-
+  /**
+   * Handle login
+   */
   const login = useCallback(async (email, password) => {
-    const result = await authService.login(email, password);
-    if (result.success) {
-      const { accessToken: newAccessToken, refreshToken: newRefreshToken, user: userData } = result.data;
-      setAccessToken(newAccessToken);
-      setRefreshToken(newRefreshToken);
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await AuthService.login({
+        email,
+        password,
+      });
+
+      const userData = response.data.user;
       setUser(userData);
+      setIsAuthenticated(true);
+
+      return response;
+    } catch (err) {
+      setError(err.message);
+      setUser(null);
+      setIsAuthenticated(false);
+      throw err;
+    } finally {
+      setLoading(false);
     }
-    return result;
   }, []);
 
-  const logout = useCallback(async () => {
-    const result = await authService.logout(refreshToken);
+  /**
+   * Handle registration
+   */
+  const register = useCallback(async (userData) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await AuthService.register(userData);
+      
+      // Don't auto-login, let user login manually
+      return response;
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  /**
+   * Handle logout
+   */
+  const logout = useCallback(() => {
+    AuthService.logout();
     setUser(null);
-    setAccessToken(null);
-    setRefreshToken(null);
-    return result;
-  }, [refreshToken]);
-
-  const refreshAccessToken = useCallback(async () => {
-    if (!refreshToken) {
-      setUser(null);
-      setAccessToken(null);
-      setRefreshToken(null);
-      return { success: false, error: 'No refresh token available' };
-    }
-
-    const result = await authService.refreshToken(refreshToken);
-    if (result.success) {
-      const { accessToken: newAccessToken, refreshToken: newRefreshToken } = result.data;
-      setAccessToken(newAccessToken);
-      setRefreshToken(newRefreshToken);
-    } else {
-      setUser(null);
-      setAccessToken(null);
-      setRefreshToken(null);
-    }
-    return result;
-  }, [refreshToken]);
-
-  const getProfile = useCallback(async () => {
-    const result = await authService.getProfile();
-    if (result.success) {
-      setUser(result.data);
-    }
-    return result;
+    setIsAuthenticated(false);
+    setError(null);
   }, []);
 
-  const isAuthenticated = !!accessToken && !!user;
+  /**
+   * Clear error
+   */
+  const clearError = useCallback(() => {
+    setError(null);
+  }, []);
 
   const value = {
     user,
-    accessToken,
-    refreshToken,
     loading,
+    error,
     isAuthenticated,
-    register,
     login,
+    register,
     logout,
-    refreshAccessToken,
-    getProfile,
+    clearError,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
+
+export const useAuth = () => {
+  const context = React.useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
+export default { AuthProvider, useAuth };
+// AuthContext already exported on line 4

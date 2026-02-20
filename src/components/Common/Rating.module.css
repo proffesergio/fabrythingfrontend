@@ -1,0 +1,40 @@
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stars {
+  display: flex;
+}
+
+.star {
+  display: flex;
+  color: #ddd;
+}
+
+.star.filled {
+  color: #ffc107;
+}
+
+.star.half {
+  color: #ffc107;
+}
+
+.star.small {
+  font-size: 0.75rem;
+}
+
+.star.medium {
+  font-size: 1rem;
+}
+
+.star.large {
+  font-size: 1.25rem;
+}
+
+.value {
+  font-size: 0.85rem;
+  color: #666;
+  margin-left: 0.25rem;
+}

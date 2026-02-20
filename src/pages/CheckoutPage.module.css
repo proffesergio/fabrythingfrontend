@@ -1,0 +1,421 @@
+.page {
+  padding: 2rem 0 4rem;
+  min-height: 100vh;
+  background: #f9f9f9;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 2rem;
+}
+
+/* Steps */
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stepNumber {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e5e5e5;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.step.active .stepNumber {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.stepLabel {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.step.active .stepLabel {
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.stepLine {
+  width: 60px;
+  height: 2px;
+  background: #e5e5e5;
+  margin: 0 1rem;
+}
+
+/* Content */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2rem;
+}
+
+.formSection {
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.section h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1.5rem;
+}
+
+/* Form */
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup.fullWidth {
+  grid-column: span 2;
+}
+
+.formGroup label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.formGroup input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: #1a1a1a;
+}
+
+/* Buttons */
+.nextBtn,
+.placeOrderBtn {
+  padding: 0.875rem 2rem;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 1.5rem;
+}
+
+.nextBtn:hover,
+.placeOrderBtn:hover {
+  background: #333;
+}
+
+.btnGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.backBtn {
+  padding: 0.875rem 2rem;
+  background: #fff;
+  color: #1a1a1a;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.backBtn:hover {
+  border-color: #1a1a1a;
+}
+
+.placeOrderBtn {
+  flex: 1;
+}
+
+/* Payment Options */
+.paymentOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.paymentOption {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.paymentOption:hover {
+  border-color: #1a1a1a;
+}
+
+.paymentOption.active {
+  border-color: #1a1a1a;
+  background: #f9f9f9;
+}
+
+.paymentOption input {
+  display: none;
+}
+
+.paymentIcon {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+}
+
+.paymentInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.paymentName {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.paymentDesc {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Order Review */
+.orderItems {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.orderItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.orderItem:last-child {
+  border-bottom: none;
+}
+
+.orderItem img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.orderItemInfo {
+  flex: 1;
+}
+
+.orderItemName {
+  display: block;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.orderItemQty {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.orderItemPrice {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* Summary */
+.summary {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.summary h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.summaryItems {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.summaryItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.summaryItem img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.summaryItem > div {
+  flex: 1;
+}
+
+.summaryName {
+  display: block;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+}
+
+.summaryQty {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.summaryRow.total {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e5e5;
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 1.125rem;
+}
+
+/* Success */
+.success {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.successIcon {
+  width: 80px;
+  height: 80px;
+  background: #43a047;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin: 0 auto 1.5rem;
+}
+
+.success h1 {
+  font-size: 1.75rem;
+  color: #1a1a1a;
+  margin: 0 0 1rem;
+}
+
+.success p {
+  color: #666;
+  margin: 0 0 0.5rem;
+}
+
+.orderNumber {
+  font-weight: 600;
+  color: #1a1a1a !important;
+  margin: 1rem 0 !important;
+}
+
+.homeBtn {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  background: #1a1a1a;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .summary {
+    position: static;
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formGroup.fullWidth {
+    grid-column: span 1;
+  }
+
+  .steps {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stepLine {
+    display: none;
+  }
+}

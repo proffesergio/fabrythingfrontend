@@ -1,0 +1,146 @@
+.timeline {
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.progressBar {
+  height: 4px;
+  background: #e5e5e5;
+  border-radius: 2px;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.progressFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #4caf50;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.iconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e5e5e5;
+  color: #999;
+  transition: all 0.3s ease;
+}
+
+.step.completed .iconWrapper {
+  background: #4caf50;
+  color: #fff;
+}
+
+.step.current .iconWrapper {
+  background: #1a1a1a;
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(26, 26, 26, 0.1);
+}
+
+.step.upcoming .iconWrapper {
+  background: #f5f5f5;
+  color: #ccc;
+}
+
+.icon {
+  font-size: 1.25rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #999;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.step.completed .label,
+.step.current .label {
+  color: #1a1a1a;
+}
+
+/* History Section */
+.history {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.history h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1rem;
+}
+
+.historyList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.historyItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.historyItem:last-child {
+  border-bottom: none;
+}
+
+.historyDate {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.historyStatus {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.historyNote {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+@media (max-width: 480px) {
+  .iconWrapper {
+    width: 36px;
+    height: 36px;
+  }
+
+  .icon {
+    font-size: 1rem;
+  }
+
+  .label {
+    font-size: 0.75rem;
+  }
+}

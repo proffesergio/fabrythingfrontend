@@ -197,6 +197,67 @@ class AuthService {
   static getAccessToken() {
     return localStorage.getItem('access_token');
   }
+
+  /**
+   * Update user profile
+   */
+  static async updateProfile(profileData) {
+    try {
+      const token = localStorage.getItem('access_token');
+
+      const response = await fetch(`${API_BASE_URL}/auth/profile/`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(profileData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Profile update failed');
+      }
+
+      // Update stored user
+      if (data.data) {
+        localStorage.setItem('user', JSON.stringify(data.data));
+      }
+
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
+   * Change password
+   */
+  static async changePassword(passwordData) {
+    try {
+      const token = localStorage.getItem('access_token');
+
+      const response = await fetch(`${API_BASE_URL}/auth/change-password/`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(passwordData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Password change failed');
+      }
+
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default AuthService;

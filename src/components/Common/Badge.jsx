@@ -1,16 +1,19 @@
 import React from 'react';
 import styles from './Badge.module.css';
 
-const Badge = ({ type = 'default', text, discount, children }) => {
+const Badge = ({ type = 'default', text, discount, variant, children }) => {
+  // Support both 'type' and 'variant' props for flexibility
+  const badgeType = variant || type;
+
   const getBadgeClass = () => {
     const baseClass = styles.badge;
-    return `${baseClass} ${styles[type] || styles.default}`;
+    return `${baseClass} ${styles[badgeType] || styles.default}`;
   };
 
   const renderContent = () => {
     if (children) return children;
 
-    switch (type) {
+    switch (badgeType) {
       case 'sale':
         return discount ? `-${discount}%` : 'Sale';
       case 'new':
@@ -23,12 +26,25 @@ const Badge = ({ type = 'default', text, discount, children }) => {
         return 'Out of Stock';
       case 'limited':
         return 'Limited';
+      // Order status variants
+      case 'warning':
+        return text || 'Pending';
+      case 'info':
+        return text || 'Processing';
+      case 'primary':
+        return text || 'Shipped';
+      case 'success':
+        return text || 'Delivered';
+      case 'danger':
+        return text || 'Cancelled';
+      case 'secondary':
+        return text || 'Returned';
       default:
         return text || '';
     }
   };
 
-  if (type === 'outofstock') {
+  if (badgeType === 'outofstock') {
     return <span className={getBadgeClass()}>{renderContent()}</span>;
   }
 

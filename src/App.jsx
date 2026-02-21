@@ -14,6 +14,16 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import WishlistPage from './pages/WishlistPage';
 import BecomeVendorPage from './pages/BecomeVendorPage';
+import ApplicationStatusPage from './pages/ApplicationStatusPage';
+import VendorDashboard from './pages/VendorDashboard';
+import VendorProductList from './pages/VendorProductList';
+import VendorOrders from './pages/VendorOrders';
+import AddProduct from './pages/AddProduct';
+import OrderHistoryPage from './pages/OrderHistoryPage';
+import OrderDetailPage from './pages/OrderDetailPage';
+import UserDashboard from './pages/UserDashboard';
+import ProfileSettings from './pages/ProfileSettings';
+import AddressBookPage from './pages/AddressBookPage';
 import ProtectedRoute from './components/Common/ProtectedRoute';
 import ErrorBoundary from './components/Common/ErrorBoundary';
 import './App.css';
@@ -34,22 +44,24 @@ function App() {
                   <Route path="cart" element={<CartPage />} />
                   <Route path="wishlist" element={<WishlistPage />} />
                   <Route path="become-vendor" element={<BecomeVendorPage />} />
-                  <Route path="become-vendor" element={<BecomeVendorPage />} />
+                  <Route path="orders" element={<OrderHistoryPage />} />
+                  <Route path="order/:id" element={<OrderDetailPage />} />
+                  <Route path="account" element={<UserDashboard />} />
+                  <Route path="profile" element={<ProfileSettings />} />
+                  <Route path="addresses" element={<AddressBookPage />} />
                 </Route>
 
                 {/* Auth Routes (without main layout) */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
 
-                {/* Checkout - separate layout */}
+                {/* Checkout - allows guest checkout */}
                 <Route
                   path="/checkout"
                   element={
-                    <ProtectedRoute>
-                      <Layout>
-                        <CheckoutPage />
-                      </Layout>
-                    </ProtectedRoute>
+                    <Layout>
+                      <CheckoutPage />
+                    </Layout>
                   }
                 />
 
@@ -59,6 +71,78 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <Dashboard />
+                    </ProtectedRoute>
+                  }
+                />
+
+                {/* Vendor Routes - All protected */}
+                <Route
+                  path="/vendor/apply"
+                  element={
+                    <ProtectedRoute>
+                      <Layout>
+                        <BecomeVendorPage />
+                      </Layout>
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/vendor/status"
+                  element={
+                    <ProtectedRoute>
+                      <Layout>
+                        <ApplicationStatusPage />
+                      </Layout>
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/vendor/dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <Layout>
+                        <VendorDashboard />
+                      </Layout>
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/vendor/products"
+                  element={
+                    <ProtectedRoute>
+                      <Layout>
+                        <VendorProductList />
+                      </Layout>
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/vendor/products/add"
+                  element={
+                    <ProtectedRoute>
+                      <Layout>
+                        <AddProduct />
+                      </Layout>
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/vendor/products/edit/:id"
+                  element={
+                    <ProtectedRoute>
+                      <Layout>
+                        <AddProduct />
+                      </Layout>
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/vendor/orders"
+                  element={
+                    <ProtectedRoute>
+                      <Layout>
+                        <VendorOrders />
+                      </Layout>
                     </ProtectedRoute>
                   }
                 />

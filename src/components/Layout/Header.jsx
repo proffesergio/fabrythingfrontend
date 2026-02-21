@@ -170,9 +170,11 @@ const Header = ({ toggleMobileMenu }) => {
             <a href="tel:+8801234567890" className={styles.topBarLink}>
               <FiPhone /> +880 1234 567890
             </a>
-            <Link to="/become-vendor" className={styles.vendorLink}>
-              <FiTrendingUp /> Become a Vendor
-            </Link>
+            {user?.role !== 'vendor' && (
+              <Link to="/become-vendor" className={styles.vendorLink}>
+                <FiTrendingUp /> Become a Vendor
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -327,6 +329,11 @@ const Header = ({ toggleMobileMenu }) => {
                       <Link to="/addresses" className={styles.menuItem} onClick={() => setIsUserMenuOpen(false)}>
                         Address Book
                       </Link>
+                      {user?.role === 'vendor' && (
+                        <Link to="/vendor/dashboard" className={styles.menuItem} onClick={() => setIsUserMenuOpen(false)}>
+                          Vendor Dashboard
+                        </Link>
+                      )}
                       <button className={styles.menuItem} onClick={handleLogout}>
                         Logout
                       </button>

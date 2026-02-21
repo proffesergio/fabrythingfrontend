@@ -1,0 +1,451 @@
+.page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.subtitle {
+  color: #6b7280;
+  margin: 4px 0 0;
+}
+
+.errorAlert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #dc2626;
+  margin-bottom: 24px;
+}
+
+.errorAlert button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #dc2626;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.statIcon {
+  font-size: 24px;
+  color: #6b7280;
+}
+
+.statContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.statValue {
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.statLabel {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.searchBox {
+  flex: 1;
+  position: relative;
+}
+
+.searchBox input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  background: white;
+}
+
+.searchBox input:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
+.filterBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.filterBox select {
+  border: none;
+  background: none;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+  padding: 12px 0;
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  color: #d1d5db;
+  margin-bottom: 16px;
+}
+
+.emptyState h3 {
+  font-size: 18px;
+  color: #374151;
+  margin: 0 0 8px;
+}
+
+.emptyState p {
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Orders List */
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.orderCard {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.orderInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.orderId {
+  font-weight: 600;
+  color: #111827;
+}
+
+.orderNumber {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.pending {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.processing {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.shipped {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.delivered {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.cancelled {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.orderBody {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.orderDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detailRow {
+  display: flex;
+  gap: 16px;
+}
+
+.detailLabel {
+  color: #6b7280;
+  font-size: 14px;
+  min-width: 80px;
+}
+
+.detailValue {
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.orderTotal {
+  color: #111827;
+  font-weight: 600;
+}
+
+.orderItems {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.orderItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.itemImage {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.itemImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.itemImage svg {
+  color: #9ca3af;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemName {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.itemQty {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.moreItems {
+  font-size: 13px;
+  color: #6b7280;
+  padding-left: 60px;
+}
+
+.orderFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #f9fafb;
+  border-top: 1px solid #f3f4f6;
+}
+
+.viewBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #4f46e5;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.viewBtn:hover {
+  text-decoration: underline;
+}
+
+.statusSelect {
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #374151;
+  background: white;
+  cursor: pointer;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+}
+
+.modalContent h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: #111827;
+}
+
+.modalContent p {
+  margin: 0 0 20px;
+  color: #6b7280;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cancelBtn {
+  padding: 10px 20px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  color: #374151;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.confirmBtn {
+  padding: 10px 20px;
+  background: #4f46e5;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.confirmBtn:hover {
+  background: #4338ca;
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .toolbar {
+    flex-direction: column;
+  }
+
+  .orderBody {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .orderFooter {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .statusSelect {
+    width: 100%;
+  }
+}

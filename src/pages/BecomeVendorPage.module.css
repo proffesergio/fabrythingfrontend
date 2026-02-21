@@ -381,3 +381,1066 @@
     gap: 1rem;
   }
 }
+
+/* Form Styles */
+.progressContainer {
+  margin-bottom: 2rem;
+}
+
+.progressSteps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.progressSteps::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  right: 40px;
+  height: 2px;
+  background: #e5e5e5;
+  z-index: 0;
+}
+
+.progressStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.stepIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #999;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.progressStep.active .stepIcon {
+  border-color: #ff4f00;
+  background: #ff4f00;
+  color: #fff;
+}
+
+.progressStep.completed .stepIcon {
+  border-color: #43a047;
+  background: #43a047;
+  color: #fff;
+}
+
+.stepLabel {
+  font-size: 0.75rem;
+  color: #666;
+  text-align: center;
+}
+
+.progressStep.active .stepLabel {
+  color: #ff4f00;
+  font-weight: 600;
+}
+
+.formContainer {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.formStep {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.formStep h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem;
+}
+
+.stepDescription {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroupFull {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label,
+.formGroupFull label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea,
+.formGroupFull input,
+.formGroupFull select,
+.formGroupFull textarea {
+  padding: 0.875rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-height: 44px;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus,
+.formGroupFull input:focus,
+.formGroupFull select:focus,
+.formGroupFull textarea:focus {
+  outline: none;
+  border-color: #ff4f00;
+  box-shadow: 0 0 0 3px rgba(255, 79, 0, 0.1);
+}
+
+.formGroup input.error,
+.formGroup select.error,
+.formGroup textarea.error {
+  border-color: #dc3545;
+}
+
+.fieldError {
+  color: #dc3545;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+/* Dropzone */
+.dropzone {
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #fafafa;
+}
+
+.dropzone:hover {
+  border-color: #ff4f00;
+  background: #fff5f0;
+}
+
+.dropzone.dragActive {
+  border-color: #ff4f00;
+  background: #fff5f0;
+}
+
+.dropzone.hasFile {
+  border-style: solid;
+  border-color: #43a047;
+}
+
+.dropzone.error {
+  border-color: #dc3545;
+}
+
+.dropzoneContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.uploadIcon {
+  font-size: 2rem;
+  color: #999;
+}
+
+.dropzoneContent p {
+  margin: 0;
+  color: #333;
+  font-weight: 500;
+}
+
+.dropzoneContent span {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.filePreview {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.fileIcon {
+  font-size: 1.5rem;
+  color: #43a047;
+}
+
+.removeFile {
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* Payout Methods */
+.payoutMethods {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.payoutMethod {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.payoutMethod:hover {
+  border-color: #ff4f00;
+}
+
+.payoutMethod.selected {
+  border-color: #ff4f00;
+  background: #fff5f0;
+}
+
+.payoutMethod input {
+  display: none;
+}
+
+.methodIcon {
+  font-size: 1.5rem;
+}
+
+.methodLabel {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Review Section */
+.reviewSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.reviewGroup {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.reviewGroup h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #666;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.reviewItems {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.reviewItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.reviewLabel {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.reviewValue {
+  font-weight: 500;
+  color: #333;
+}
+
+/* Terms */
+.termsBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.termsBox input {
+  margin-top: 0.25rem;
+}
+
+.termsBox label {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.termsBox a {
+  color: #ff4f00;
+  text-decoration: none;
+}
+
+/* Form Navigation */
+.formNavigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.backBtn:hover {
+  background: #f5f5f5;
+}
+
+.nextBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: #ff4f00;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.nextBtn:hover {
+  background: #e64700;
+}
+
+.submitBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: #43a047;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #388e3c;
+}
+
+.submitBtn:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+/* Error Alert */
+.errorAlert {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #f5c6cb;
+}
+
+/* Success Container */
+.successContainer {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.successIcon {
+  width: 80px;
+  height: 80px;
+  background: #43a047;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin: 0 auto 2rem;
+}
+
+.successContainer h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.successContainer p {
+  color: #666;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+.successActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Mobile Form Styles */
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 1.5rem;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formGroupFull {
+    grid-column: span 1;
+  }
+
+  .progressSteps::before {
+    left: 20px;
+    right: 20px;
+  }
+
+  .stepIcon {
+    width: 36px;
+    height: 36px;
+    font-size: 0.875rem;
+  }
+
+  .stepLabel {
+    font-size: 0.625rem;
+  }
+
+  .payoutMethods {
+    flex-direction: column;
+  }
+
+  .reviewItems {
+    grid-template-columns: 1fr;
+  }
+
+  .formNavigation {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+
+  .backBtn,
+  .nextBtn,
+  .submitBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .successActions {
+    flex-direction: column;
+  }
+}
+
+/* ========================================
+   Multi-Step Form Styles
+   ======================================== */
+
+/* Progress Container */
+.progressContainer {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.progressSteps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.progressSteps::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  right: 40px;
+  height: 2px;
+  background: #e5e5e5;
+  z-index: 0;
+}
+
+.progressStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.stepIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.progressStep.active .stepIcon {
+  background: #ff4f00;
+  color: #fff;
+}
+
+.progressStep.completed .stepIcon {
+  background: #43a047;
+  color: #fff;
+}
+
+.stepLabel {
+  font-size: 0.75rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.progressStep.active .stepLabel {
+  color: #ff4f00;
+  font-weight: 600;
+}
+
+/* Form Container */
+.formContainer {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.errorAlert {
+  background: #ffebee;
+  color: #c62828;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.formStep h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem;
+}
+
+.stepDescription {
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroupFull {
+  grid-column: 1 / -1;
+}
+
+.formGroup label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+  min-height: 44px;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #ff4f00;
+}
+
+.formGroup input.error,
+.formGroup select.error,
+.formGroup textarea.error {
+  border-color: #f44336;
+}
+
+.fieldError {
+  color: #f44336;
+  font-size: 0.8rem;
+}
+
+/* Dropzone */
+.dropzone {
+  border: 2px dashed #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #fafafa;
+}
+
+.dropzone:hover {
+  border-color: #ff4f00;
+  background: #fff5f0;
+}
+
+.dropzone.dragActive {
+  border-color: #ff4f00;
+  background: #fff5f0;
+}
+
+.dropzone.hasFile {
+  border-style: solid;
+  border-color: #43a047;
+}
+
+.dropzone.error {
+  border-color: #f44336;
+}
+
+.dropzoneContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.uploadIcon {
+  font-size: 2rem;
+  color: #999;
+}
+
+.dropzoneContent p {
+  color: #333;
+  margin: 0;
+}
+
+.dropzoneContent span {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.filePreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.fileIcon {
+  font-size: 1.5rem;
+  color: #43a047;
+}
+
+.filePreview span {
+  color: #333;
+  font-weight: 500;
+}
+
+.removeFile {
+  background: #ffebee;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #c62828;
+}
+
+/* Payout Methods */
+.payoutMethods {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.payoutMethod {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.payoutMethod:hover {
+  border-color: #ff4f00;
+}
+
+.payoutMethod.selected {
+  border-color: #ff4f00;
+  background: #fff5f0;
+}
+
+.payoutMethod input {
+  display: none;
+}
+
+.methodIcon {
+  font-size: 1.5rem;
+}
+
+.methodLabel {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Review Section */
+.reviewSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.reviewGroup {
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.reviewGroup h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.reviewItems {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.reviewItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviewLabel {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.reviewValue {
+  color: #333;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Terms Box */
+.termsBox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.termsBox input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.termsBox label {
+  color: #666;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.termsBox a {
+  color: #ff4f00;
+  text-decoration: none;
+}
+
+.termsBox a:hover {
+  text-decoration: underline;
+}
+
+/* Form Navigation */
+.formNavigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #f5f5f5;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.backBtn:hover {
+  background: #e0e0e0;
+}
+
+.nextBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #ff4f00;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-left: auto;
+}
+
+.nextBtn:hover {
+  background: #e64700;
+}
+
+.submitBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: #43a047;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-left: auto;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #388e3c;
+}
+
+.submitBtn:disabled {
+  background: #a5d6a7;
+  cursor: not-allowed;
+}
+
+/* Success Container */
+.successContainer {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.successIcon {
+  width: 80px;
+  height: 80px;
+  background: #e8f5e9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.successIcon svg {
+  font-size: 2.5rem;
+  color: #43a047;
+}
+
+.successContainer h2 {
+  font-size: 1.75rem;
+  color: #1a1a1a;
+  margin: 0 0 1rem;
+}
+
+.successContainer p {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.successActions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.successActions .primaryBtn {
+  background: #ff4f00;
+  color: #fff;
+  padding: 0.875rem 1.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.successActions .secondaryBtn {
+  background: #f5f5f5;
+  color: #333;
+  padding: 0.875rem 1.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Responsive Form */
+@media (max-width: 768px) {
+  .progressSteps::before {
+    left: 20px;
+    right: 20px;
+  }
+
+  .stepLabel {
+    font-size: 0.65rem;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .payoutMethods {
+    flex-direction: column;
+  }
+
+  .formNavigation {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .backBtn,
+  .nextBtn,
+  .submitBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nextBtn,
+  .submitBtn {
+    margin-left: 0;
+  }
+
+  .successActions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .progressContainer {
+    padding: 1rem;
+  }
+
+  .stepIcon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+
+  .formContainer {
+    padding: 1.25rem;
+  }
+
+  .formStep h2 {
+    font-size: 1.25rem;
+  }
+}

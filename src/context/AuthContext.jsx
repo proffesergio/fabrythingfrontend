@@ -110,6 +110,47 @@ export const AuthProvider = ({ children }) => {
     setError(null);
   }, []);
 
+  /**
+   * Update user profile
+   */
+  const updateProfile = useCallback(async (profileData) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await AuthService.updateProfile(profileData);
+
+      if (response && response.data) {
+        setUser(response.data);
+      }
+
+      return response;
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  /**
+   * Change password
+   */
+  const changePassword = useCallback(async (passwordData) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await AuthService.changePassword(passwordData);
+      return response;
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   const value = {
     user,
     loading,
@@ -119,6 +160,8 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     clearError,
+    updateProfile,
+    changePassword,
   };
 
   return (

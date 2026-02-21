@@ -47,3 +47,65 @@
   background: #ff6f00;
   color: #fff;
 }
+
+/* Order Status Variants */
+.warning {
+  background: #ff9800;
+  color: #fff;
+}
+
+.info {
+  background: #2196f3;
+  color: #fff;
+}
+
+.primary {
+  background: #9c27b0;
+  color: #fff;
+}
+
+.success {
+  background: #4caf50;
+  color: #fff;
+}
+
+.danger {
+  background: #f44336;
+  color: #fff;
+}
+
+.secondary {
+  background: #607d8b;
+  color: #fff;
+}
+
+/* Order Status Variants */
+.warning {
+  background: #ff9800;
+  color: #fff;
+}
+
+.info {
+  background: #2196f3;
+  color: #fff;
+}
+
+.primary {
+  background: #9c27b0;
+  color: #fff;
+}
+
+.success {
+  background: #4caf50;
+  color: #fff;
+}
+
+.danger {
+  background: #f44336;
+  color: #fff;
+}
+
+.secondary {
+  background: #607d8b;
+  color: #fff;
+}

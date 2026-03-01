@@ -28,7 +28,22 @@ import ProtectedRoute from './components/Common/ProtectedRoute';
 import ErrorBoundary from './components/Common/ErrorBoundary';
 import './App.css';
 
+// import { useEffect, useState } from 'react';
+// import store from './redux/store/store';
+// import { useDispatch } from 'react-redux';
+// import { Provider } from 'react-redux';
+// import { fetchSidebar } from './redux/reducer/sidebardata';
+
 function App() {
+  // const { status, error, items } = useSelector(state=>state.sidebardata);
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if (status === 'idle') {
+  //     dispatch(fetchSidebar());
+  //   }
+  // }, [status, dispatch])
+
   return (
     <ErrorBoundary>
       <BrowserRouter>

@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import useAuth from '../../hooks/useAuth';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
+import { fetchSidebar } from '../../redux/reducer/sidebardata';
 import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, logout, loading } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const dispatch = useDispatch();
+  const { status } = useSelector(state => state.sidebardata);
+
+  // Fetch sidebar menus when component mounts
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchSidebar());
+    }
+  }, [status, dispatch]);
 
   const handleLogout = () => {
     logout();

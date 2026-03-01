@@ -5,7 +5,10 @@ import Footer from './Footer';
 import MobileMenu from './MobileMenu';
 import styles from './Layout.module.css';
 
+
+
 const Layout = () => {
+  // const [sidebarItems, setSidebarItems] = useState(sidebarList);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
